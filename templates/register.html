@@ -1,0 +1,78 @@
+{% import "bootstrap/wtf.html" as wtf %}
+	            	          
+<html>
+
+<head>
+{% block head %}
+    <title>Real Estate Enterprise</title>
+    <script type="text/javascript" src="{{url_for('static', filename='js/homepage.js')}}"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/gallery.css') }}">
+{% endblock %}
+</head>
+
+
+<body>
+    {% block navbar %}
+  <nav class="navbar navbar-inverse" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+        </button>
+        <a class="navbar-brand" href="{{url_for('homepage')}}">Real Estate Enterprise</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <div id="edit-bar">
+          <ul class="nav navbar-nav">
+            <li><a href="{{url_for('homepage')}}">Home</a></li>
+            <li class="dropdown">
+            <li><a href="{{url_for('contact')}}">Contacts</a></li>
+            <li><a href="{{url_for('gallery')}}">Gallery</a></li>
+          {% if not current_user.is_authenticated%}
+            <li><a href="{{url_for('register')}}">SignUp</a></li>
+          </ul>
+           {% endif %}
+        </div>
+          <ul class="nav navbar-nav navbar-right">
+            {% if current_user.is_authenticated %}
+              <li>
+              <a href="{{url_for('logout') }}">Logout</a>
+            {% else %}</li>
+              <li>
+              <a href="{{ url_for('login') }}">Login</a>
+             {% endif %}</li>
+          </ul>
+      </div>
+    </div>
+  </nav>
+  {% endblock %}
+
+
+
+  {% block content %}
+  	  <div id="edit">
+        	<form class="form form-horizontal" method="POST" action="/signup">
+				    <div class="row">
+			        <div class="col-md-3" id= "signup">
+			            {{ wtf.quick_form(form) }}
+			        </div>
+			      </div>
+	 		    </form>	   
+      </div>
+  {% endblock %}
+
+
+</body>
+
+</html>
+
+	            
+	            
+    
+		

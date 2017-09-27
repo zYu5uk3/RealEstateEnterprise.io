@@ -1,0 +1,73 @@
+/*-------*/
+.title-head{
+    text-align:center;
+	margin-bottom:15px;
+}
+.title-head p{
+	font-weight:300;
+	font-size:20px;color:#515151;
+	line-height:25px;
+}
+.title-head h1{
+	font-size:148px;
+	color:#515151;
+	font-weight:900;
+	line-height:150px;
+	margin:0 0 15px;
+}
+.map-holder{
+	position:relative;
+}
+.addressholder{
+	width:360px;
+	background:#fff;
+	position:absolute;
+	left:50%;
+	margin-left:-180px;
+	top:12%;
+	z-index:9999;
+}
+.addressholder .addressheader{
+	text-align:center;
+	padding:15px;
+	background:#515151;
+}
+.addressholder ul{
+	font-style:normal;
+	list-style:none;
+	padding:0;
+	margin:00;
+	display:table;
+	
+}
+.addressholder ul li{
+	padding:15px 15px;
+	display:table
+}
+.addressholder ul li i{
+	display:table-cell;
+	vertical-align:middle;
+	border-right:solid 1px #dddddd;
+	padding:15px;
+}
+.addressholder ul li i img{
+	display:table-cell;
+	vertical-align:middle;
+}
+.addressholder ul li .ctnaddr{
+	display:table-cell;
+	vertical-align:middle;
+	padding:15px;
+	min-height:80px;
+}
+
+  .navbar {
+      border: 0;
+      border-radius: 0;
+      margin-bottom: 0;
+      font-size: 12px;
+      letter-spacing: 5px;
+  }
+  .navbar-nav  li a:hover {
+      color: #1abc9c !important;
+  }

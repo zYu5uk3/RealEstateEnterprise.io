@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block page_content %}
+
+	<div id="right">
+	    <p>You are {% if not (current_user.is_authenticated) %}not {% endif %}logged in.</p>
+	</div>
+	
+
+
+{% endblock %}

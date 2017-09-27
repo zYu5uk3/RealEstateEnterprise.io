@@ -1,0 +1,296 @@
+
+<html>
+
+<head>
+{% block head %}
+    <title>Real Estate Enterprise</title>
+    <script type="text/javascript" src="{{url_for('static', filename='js/homepage.js')}}"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/contact.css') }}">
+    <script type="text/javascript">
+
+(function() {
+    var s = document.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = 'https://maps.googleapis.com/maps/api/js?v=3.13&libraries=places';
+    var x = document.getElementsByTagName('script')[0];
+    x.parentNode.insertBefore(s, x);
+})();
+
+</script>
+<script type="text/javascript">
+// When the DOM is ready, run this function
+      $(document).ready(function() {
+      //Set the carousel options
+      $('#quote-carousel').carousel({
+      pause: true,
+      interval: 10000,
+      });
+    });
+    
+    function init() {
+    window.addEventListener('scroll', function(e){
+      var distanceY = window.pageYOffset || document.documentElement.scrollTop,
+        shrinkOn = 300,
+        header = document.querySelector("nav");
+      if (distanceY > shrinkOn) {
+        classie.add(header,"smaller");
+      } else {
+        if (classie.has(header,"smaller")) {
+          classie.remove(header,"smaller");
+        }
+      }
+    });
+  }
+  window.onload = init();
+    </script>
+    
+
+  <script type="text/javascript">
+
+jQuery(document).ready(function($) {
+  var map;
+  var service;
+  var latMap;
+  var longMap;
+  var g;
+  var schoolMarkers = [];
+  var hospitalMarkers = [];
+  var restaurantMarkers = [];
+  var doctorMarkers = [];
+  var shopping_mallMarkers = [];
+  var movie_theaterMarkers = [];
+  var foodMarkers = [];
+  var metro_stationMarkers = [];      
+  var mosqueMarkers = []; 
+  var infowindow;
+  var html = "";
+  var markers = [];
+
+  function TextualZoomControl(map) {
+    var g = google.maps;
+    var control = document.createElement("div");
+    control.id = "zoomcontrol";
+    var zoomInDiv = document.createElement("div");
+    this.setButtonStyle_(zoomInDiv);
+    control.appendChild(zoomInDiv);
+    zoomInDiv.appendChild(document.createTextNode(" "));
+
+    g.event.addDomListener(zoomInDiv, "click", function() {
+      map.setZoom(map.getZoom()+1);
+  });
+
+  var zoomOutDiv = document.createElement("div");
+  this.setButtonStyle_(zoomOutDiv);
+  control.appendChild(zoomOutDiv);
+  zoomOutDiv.appendChild(document.createTextNode(" "));
+
+  g.event.addDomListener(zoomOutDiv, "click", function() {
+    map.setZoom(map.getZoom()-1);
+  });
+
+  document.body.appendChild(control);
+  return control;
+}
+
+
+// Set the proper CSS for the given button element.
+TextualZoomControl.prototype.setButtonStyle_ = function(button) {
+  button.style.cursor = "pointer";
+}
+
+
+function loadMap() {
+
+  g = google.maps;
+  latMap = $("#map").attr("lat");
+  longMap = $("#map").attr("long");
+  var opts_map = {
+    zoom:15,
+    styles: [
+    {
+        "featureType": "water",
+        "elementType": "geometry",
+        "stylers": [
+          { "color": "#927891" },/*#b1c1ce*/
+          { "visibility": "on" }
+        ]
+      },{
+        "featureType": "landscape",
+        "stylers": [
+          { "color": "#f4f3ec" }
+        ]
+      },{
+        "featureType": "road",
+        "elementType": "geometry",
+        "stylers": [
+          { "color": "#f4f1ea" }/*#dae1e7*/
+        ]
+      },{
+        "elementType": "labels",
+        "stylers": [
+          { "visibility": "off" }
+        ]
+      },{
+        "featureType": "poi",
+        "stylers": [
+          { "visibility": "off" }
+        ]
+      },{
+      },{
+        "featureType": "transit",
+        "elementType": "geometry",
+        "stylers": [
+          { "visibility": "on" },
+          { "hue": "#e9e5dc" }/*#0091ff*/
+        ]
+      },{
+        "featureType": "road",
+        "elementType": "labels.text",
+        "stylers": [
+          { "visibility": "on" }
+        ]
+      }
+    ],
+    center: new g.LatLng(latMap,longMap),
+    disableDefaultUI: true,
+    scrollwheel: true,
+    mapTypeControlOptions: {
+      style: g.MapTypeControlStyle.DEFAULT
+    },
+    mapTypeId: g.MapTypeId.ROADMAP,
+      };
+  
+  map = new g.Map(document.getElementById("map"), opts_map);
+  
+  var marker = new g.Marker({
+    position : new g.LatLng(latMap,longMap),
+    map : map,
+    icon: 'images/location-pin.png',  
+  });
+  // Add self created control
+  var zoom_control = new TextualZoomControl(map); 
+  zoom_control.index = 1;
+  $("#zoomcontrol").appendTo("#mapdiv");
+  infowindow = new google.maps.InfoWindow();
+}
+
+window.onload = loadMap;
+
+}); </script>
+
+{% endblock %}
+</head>
+
+
+<body>
+    {% block navbar %}
+     <nav class="navbar navbar-inverse" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>                        
+          </button>
+          <a class="navbar-brand" href="{{url_for('homepage')}}">Real Estate Enterprise</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <div id="edit-bar">
+            <ul class="nav navbar-nav">
+              <li>
+                 <a href="{{url_for('homepage')}}">Home</a>
+              </li>
+              <li>
+                 <a href="{{url_for('contact')}}">Contacts</a>
+              </li>
+              <li>
+                 <a href="{{url_for('gallery')}}">Gallery</a>
+              </li>
+              {% if current_user.is_authenticated%}
+              <li>
+                 <a href="{{url_for('search',username=current_user.username)}}">Search Listings</a>
+              </li>
+              {% endif %}
+              {% if current_user.is_authenticated%}
+              <li>
+                 <a href="{{url_for('blog',username=current_user.username)}}">Blog</a>
+              </li>
+              {% endif %}
+              {% if not current_user.is_authenticated%}
+              <li>
+                <a href="{{url_for('register')}}">SignUp</a>
+              </li>
+            </ul>
+             {% endif %}
+          </div>
+            <ul class="nav navbar-nav navbar-right">
+
+              {% if current_user.is_authenticated %}
+                  <li>
+                    <a href="{{url_for('logout') }}">Logout</a>
+                  </li>
+                  <li>
+                    <a href="{{ url_for('user', username=current_user.username) }}">
+                       Profile
+                    </a>
+              {% else %}</li>
+                  <li>
+                    <a href="{{ url_for('login') }}">Login</a>
+                  </li>
+              {% endif %}
+              <li>
+              {%  if current_user.is_authenticated  %}
+                <a  href="{{url_for('edit')}}">
+                  Edit Profile
+                </a>
+              </li>
+              {% endif %}
+            </ul>
+        </div>
+      </div>
+    </nav>
+  {% endblock %}
+
+
+
+
+  {% block content %}
+  <section class="map-holder">
+      <div class="properties-map" style="position: relative;">
+        <div  id="mapdiv" style="position: relative;"><div class="addressholder">
+                <div class="addressheader"><img src="static/images/contacts.jpg" width="232" height="82" alt="logo"></div>
+                  <ul>
+                    <li>
+                      <span class="ctnaddr">1234 Real Estate Enterprise<br/> Suite 10<br/>Edinburg, TX 78539</span>
+                    </li>
+                    <li>
+                      <span class="ctnaddr">888.WEB.HITZ <br/>
+                          Toll Free   (1800.932.4489) <br/>
+                          Phone        1800.713.1410 <br/>
+                          Fax          1800.454.2857
+                      </span>
+                    </li>
+                      <li>
+                       <a href="#">realestateenterprise@homes.com</a></span>
+                      </li>
+                  </ul>
+              </div>
+            <div lat="26.314392" long="-98.163196" id="map" style="height:768px;"></div>
+        </div>
+      </div>
+  </section>
+
+
+   <script src="https://maps.googleapis.com/maps/api/js?callback=myMap"></script>
+  {% endblock %}
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+body{
+		background:url("san.jpg") no-repeat center fixed;
+		background-size: cover;
+
+}
+
+#move{
+  position: absolute;
+  right:40%;   
+
+}
+
+#border-map{
+
+  position: absolute;
+  left:-20%;
+
+}
+
+
+#map{
+
+ position: absolute;
+ left:0%;
+ box-shadow: 0 10px 12px 0 rgba(245, 234, 239, 0.93), 0 10px 20px 0 rgba(254, 246, 241, 0.83);
+ border: 2px solid #333;
+ border-radius: 20px 55px;
+}
+
+
+.posts{
+
+	position: absolute;
+	top:20%;
+	left:55%;
+
+
+}
+.post-body{
+  font-size:medium;
+  font-style: normal;
+  color: white;
+}
+
+.post-author{
+  font-size:large;
+  font-style: normal;
+}
